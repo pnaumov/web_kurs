@@ -1,11 +1,10 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.Statement" %>
-<%@page import="java.sql.ResultSet"%>
+<%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.sql.DriverManager" %>
 
 
-<%--<%@ page contentType="text/html" pageEncoding="UTF-8"%>--%>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.DriverManager" %>
@@ -19,6 +18,9 @@
     </head>
     <body>
         <%
+            request.setCharacterEncoding("UTF-8");
+            String surnameQuery = request.getParameter("surname");
+            surnameQuery = "\"%" + surnameQuery + "%\"";
             Connection conn = null;
             //PreparedStatement pstmt = null;
             Statement pstmt = null;
@@ -32,11 +34,11 @@
                 conn = DriverManager.getConnection(url, userName, password);
 //              out.print("Удачное подключение<br>");
 //              String query = "SELECT id_user, surname, name FROM users WHERE surname like ?";
-                String query = "SELECT id_user, surname, name FROM users";
-//                pstmt = conn.prepareStatement(query);
+                String query = "SELECT id_user, surname, name FROM users WHERE surname like "+ surnameQuery;
+//                out.print(query +"<br>");
+                pstmt = conn.prepareStatement(query);
                 pstmt = conn.createStatement();
-                String surnameQuery = request.getParameter("surname");
-                surnameQuery = "%" + surnameQuery + "%";
+                
 //                pstmt.setString(1, surnameQuery);
 //                ResultSet rs=pstmt.executeQuery();
                 ResultSet rs=pstmt.executeQuery(query);
