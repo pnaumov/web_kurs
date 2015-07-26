@@ -3,6 +3,8 @@
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.sql.DriverManager" %>
+
+
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.DriverManager" %>
@@ -41,30 +43,32 @@
 //                ResultSet rs=pstmt.executeQuery();
                 ResultSet rs=pstmt.executeQuery(query);
         %>        
-        <form method="POST" action="action.delete.jsp"> 
+         
             <table border="1">                
                 <tr> 
-                    <th></th>
                     <th>ID</th>
                     <th>Фамилия</th>
                     <th>Имя</th>
+                    <th></th>
                 </tr>
                 <%while (rs.next()) {
                     int id_user=rs.getInt(1);
                     String surname=rs.getString(2);
                     String name=rs.getString(3);
                 %>
+                <form method="POST" action="obnov.jsp">
                 <tr>
-                    <td><input type="checkbox" name="id" value="<%= id_user%>"></td>
+                    <input type=hidden name="id" value="<%= id_user%>">
                     <td> <%= id_user%></td>
                     <td> <%= surname%></td>
                     <td> <%= name%></td>
+                    <td> <input value="Обновить" type="submit" onclick="window.location.href = 'obnov.jsp'"> <br> </td>
                 </tr>
+                </form>
                 <%}%>
             </table> 
-            <input value="Удалить запись" type="submit"> <br>
-            <input value="Назад" type="button" onclick="window.location.href = 'search.jsp'"> <br>
-        </form>     
+            <input value="Назад" type="button" onclick="window.location.href = 'search_obn.jsp'"> <br>
+             
         <%
                 
             } catch (Exception e) {

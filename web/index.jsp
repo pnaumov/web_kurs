@@ -16,7 +16,7 @@
     <body>
         <h1>Адресная книга</h1>   
         <input value="Добавить запись" type="button" onclick="window.location.href='save.jsp'"> <br>
-        <input value="Найти и обновить запись" type="button" onclick="window.location.href='action.delete11.jsp'"> <br>
+        <input value="Найти и обновить запись" type="button" onclick="window.location.href='search_obn.jsp'"> <br>
         <input value="Найти и удалить запись" type="button" onclick="window.location.href='search.jsp'"> <br> 
         <input value="Показать всех" type="button" onclick="window.location.href='select.jsp'"> <br> 
     </body>
